@@ -27,7 +27,7 @@ config = do
 
     case (readRsaSecret privateKeyContent, readRsaPublicKey publicKeyContent) of
         (Just privateKey, Just publicKey) -> option $ RsaKeys publicKey privateKey
-        _ -> error "Failed to read RSA keys, please execute from the root of your project: ssh-keygen -t rsa -b 4096 -m PEM -f ./Config/jwtRS256.key && openssl rsa -in ./Config/jwtRS256.key -pubout -outform PEM -out ./Config/jwtRS256.key.pub"
+        _ -> liftIO $ putStrLn "Failed to read RSA keys, please execute from the root of your project: ssh-keygen -t rsa -b 4096 -m PEM -f ./Config/jwtRS256.key && openssl rsa -in ./Config/jwtRS256.key -pubout -outform PEM -out ./Config/jwtRS256.key.pub"
 
 
 readRsaKeyFromFile :: FilePath -> IO BS.ByteString

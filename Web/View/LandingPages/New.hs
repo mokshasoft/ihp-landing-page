@@ -20,6 +20,7 @@ renderForm landingPage = formFor landingPage [hsx|
 
     <div class="flex flex-col gap-y-4">
         {(textField #title)}
+        {dateTimeField #startTime}
 
         {submitButton {label = "Save Landing page"}}
     </div>
