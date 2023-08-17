@@ -12,7 +12,8 @@ instance Controller LandingPagesController where
         render IndexView { .. }
 
     action NewLandingPageAction = do
-        let landingPage = newRecord
+        now <- getCurrentTime
+        let landingPage = newRecord |> set #startTime now
         render NewView { .. }
 
     action ShowLandingPageAction { landingPageId } = do
@@ -104,6 +105,6 @@ instance Controller LandingPagesController where
         redirectTo LandingPagesAction
 
 buildLandingPage landingPage = landingPage
-    |> fill @'["title"]
+    |> fill @'["title", "startTime"]
     |> validateField #title nonEmpty
 
